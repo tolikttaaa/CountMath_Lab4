@@ -2,6 +2,7 @@ package back.solution;
 
 import back.DerivativeFunc;
 import back.Interval;
+import back.Point;
 import back.exception.NotImplementedSolutionException;
 
 import java.util.Collections;
@@ -46,7 +47,7 @@ public class InterpolationSolver {
                 double res = p0.second;
 
                 double q = (argument - p0.first) / h;
-                double product = 1;
+                double product = 1d;
 
                 for (int i = 1; i < n; i++) {
                     product *= q + 1 - i;

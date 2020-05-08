@@ -42,10 +42,8 @@ public enum InterpolationMethodType implements DotGenerator {
         }
     };
 
-    private static final double EPS = 1e-9d;
-
     private static final Random random = new Random(566);
-    private String methodName;
+    private final String methodName;
 
     InterpolationMethodType(String methodName) {
         this.methodName = methodName;

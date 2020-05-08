@@ -3,13 +3,15 @@ package ui;
 import back.Function;
 import back.exception.NotAllowedScopeException;
 import back.exception.UnavailableCodeException;
-import back.solution.Point;
+import back.Point;
 import javafx.scene.chart.XYChart;
 
 import java.util.List;
 
 public class Graph {
-    private XYChart<Double, Double> graph;
+    private static final double EPS = 1e-9d;
+
+    private final XYChart<Double, Double> graph;
 
     public Graph(final XYChart<Double, Double> graph) {
         this.graph = graph;
@@ -19,8 +21,10 @@ public class Graph {
             throws NotAllowedScopeException, UnavailableCodeException {
         final XYChart.Series<Double, Double> series = new XYChart.Series<>();
 
-        for (double x = lowerBound; x <= upperBound; x += (upperBound - lowerBound) / 1000d) {
+        int i = 0;
+        for (double x = lowerBound; i < 1001; x += (upperBound - lowerBound) / 1000d) {
             plotPoint(x, function.getValue(x), series);
+            i++;
         }
 
         graph.getData().add(series);

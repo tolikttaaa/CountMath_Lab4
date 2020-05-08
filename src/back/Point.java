@@ -1,6 +1,4 @@
-package back.solution;
-
-import back.Pair;
+package back;
 
 public class Point extends Pair<Double, Double> implements Comparable<Point> {
     private static final double EPS = 1e-9d;
