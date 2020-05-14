@@ -37,10 +37,9 @@ public class OrdinaryDifferentialEquationSolver {
                 throw new NotImplementedSolutionException();
         }
 
-        System.err.println(count);
-
         if (count > 80) {
-            throw new InvalidValueException("Can't solve ODE on this bounds with this accuracy");
+            throw new InvalidValueException("Can't solve ODE on this bounds with this accuracy.\n" +
+                    "Count of points for interpolation too big (" + count + ")");
         } else {
             return new OrdinaryDifferentialEquationSolverResult(
                     InterpolationSolver.solveInterpolation(InterpolationMethodType.NEWTON_POLYNOMIAL, points),

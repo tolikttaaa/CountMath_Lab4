@@ -15,11 +15,11 @@ public enum OrdinaryDifferentialEquationMethodType {
     ),
     ADAMS_METHOD(
             "Adams' method",
-            4
+            5
     ),
     MILNE_METHOD(
             "Milne's method",
-            4
+            5
     );
 
     private final String methodName;

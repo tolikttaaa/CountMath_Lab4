@@ -1,154 +1,116 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainController">
-   <children>
-      <HBox spacing="10.0" style="-fx-background-color: E0E0E0;">
-         <children>
-            <Button mnemonicParsing="false" onAction="#setVisibleODEPane" text="ODE solver" />
-            <Button mnemonicParsing="false" onAction="#setVisibleHelpPane" text="Help" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="895.0" prefWidth="1400.0">
-         <children>
-            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="425.0">
-               <children>
-                  <Label fx:id="helpPane" alignment="TOP_LEFT" cacheShape="false" centerShape="false" scaleShape="false" text="The purpose of this application is to implement interpolation of the equations by various methods.&#10;&#10;* You can choose function from the list:&#10;   1) y = x^3 - x + 4&#10;   2) y = cos(x)/(x^2 + 1)&#10;   3) y = sin(x)&#10;* You can choose method from the list:&#10;   1) By Lagrange polynomial&#10;   2) By Newton polynomial (Done)&#10;   3) By Cubic Spline&#10;* Also you need to set the bounds of the solution and count of points.&#10;* After point generation you are able to perform interpolation. Also, you can change the `y` coordinate of each point.&#10;* When interpolation is ready you can get the value of function in each point what you want.&#10;&#10;Plot legend:&#10;* orange - selected function&#10;* blue - selected points&#10;* green - interpolated function&#10;* red - interpolated function point&#10;&#10;Implemented by Anatoliy Anischenko&#10;" textAlignment="JUSTIFY" visible="false" wrapText="true" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+      prefWidth="1200.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainController">
+   <HBox spacing="10.0" style="-fx-background-color: E0E0E0;">
+      <Button mnemonicParsing="false" onAction="#setVisibleODEPane" text="ODE solver"/>
+      <Button mnemonicParsing="false" onAction="#setVisibleHelpPane" text="Help"/>
+   </HBox>
+   <HBox alignment="CENTER" prefHeight="895.0" prefWidth="1400.0">
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="425.0">
+         <Label fx:id="helpPane" alignment="TOP_LEFT" cacheShape="false" centerShape="false" scaleShape="false"
+                text="The purpose of this application is to solve the Cauchy problem for first-order ODEs using one of the presented methods.&#10;&#10;* You can select an ODE from the list:&#10;1) y' = 2x^2&#10;2) y' = x - y&#10;3) y' = sin(x) + y&#10;* You can select a method from the list:&#10;1) Euler's method (Done)&#10;2) Improved Euler's method (Done)&#10;3) Runge-Kutta method (Done)&#10;4) Adams' method (Done)&#10;5) Milne's method&#10;* You also need to set the starting point, the bounds of the decision segment and the accuracy&#10;* When the problem is solved, you can get the value of the result function at each point that you want.&#10;&#10;The plot legend:&#10;* orange is the real solution&#10;* blue - points obtained by the method&#10;* green - received function&#10;* red - point of the received function&#10;&#10;Implemented by Anatoliy Anischenko&#10;"
+                textAlignment="JUSTIFY" visible="false" wrapText="true" AnchorPane.bottomAnchor="20.0"
+                AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <font>
+               <Font size="14.0"/>
+            </font>
+         </Label>
+         <VBox alignment="TOP_CENTER" spacing="50.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0"
+               AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <AnchorPane>
+               <VBox fx:id="odePane" alignment="TOP_CENTER" spacing="40.0" AnchorPane.bottomAnchor="0.0"
+                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <HBox alignment="TOP_CENTER" spacing="30.0">
+                     <VBox alignment="TOP_CENTER" spacing="10.0">
+                        <Label text="Method"/>
+                        <ChoiceBox fx:id="method" prefWidth="149.0"/>
+                     </VBox>
+                     <VBox alignment="TOP_CENTER" fillWidth="false" spacing="10.0">
+                        <Label text="Equation"/>
+                        <ChoiceBox fx:id="equation" prefWidth="149.0"/>
+                     </VBox>
+                  </HBox>
+                  <VBox alignment="CENTER" spacing="20.0">
+                     <HBox alignment="TOP_CENTER" spacing="30.0">
+                        <VBox alignment="TOP_CENTER" spacing="10.0">
+                           <Label text="Left bound (x0)"/>
+                           <TextField fx:id="x0"/>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" spacing="10.0">
+                           <Label text="Left bound value (y0)"/>
+                           <TextField fx:id="y0"/>
+                        </VBox>
+                     </HBox>
+                     <HBox alignment="TOP_CENTER" spacing="30.0">
+                        <VBox alignment="TOP_CENTER" spacing="10.0">
+                           <Label text="Right bound (xn)"/>
+                           <TextField fx:id="xn"/>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" spacing="10.0">
+                           <Label text="Accuracy"/>
+                           <TextField fx:id="accuracy"/>
+                        </VBox>
+                     </HBox>
+                     <HBox alignment="TOP_CENTER" spacing="30.0">
+                        <VBox alignment="CENTER" spacing="10.0">
+                           <Button alignment="CENTER" mnemonicParsing="false"
+                                   onAction="#calculate" prefWidth="149.0" text="Calculate"/>
+                        </VBox>
+                     </HBox>
+                  </VBox>
+               </VBox>
+            </AnchorPane>
+            <AnchorPane>
+               <Label fx:id="error" alignment="TOP_LEFT" maxHeight="-Infinity" minWidth="-Infinity"
+                      prefHeight="100.0" text="Error&#10;Error&#10;Error&#10;" textFill="RED"
+                      visible="false" wrapText="true" AnchorPane.bottomAnchor="0.0"
+                      AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <font>
+                     <Font name="Consolas Bold" size="12.0"/>
+                  </font>
+               </Label>
+            </AnchorPane>
+            <AnchorPane fx:id="result">
+               <VBox alignment="CENTER" prefHeight="150.0" spacing="10.0" AnchorPane.bottomAnchor="0.0"
+                     AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Label text="Result of the interpolation">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="16.0"/>
                      </font>
                   </Label>
-                  <VBox alignment="TOP_CENTER" spacing="50.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-                     <children>
-                        <AnchorPane>
-                           <children>
-                              <VBox fx:id="odePane" alignment="TOP_CENTER" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <HBox alignment="TOP_CENTER" spacing="30.0">
-                                       <children>
-                                          <VBox alignment="TOP_CENTER" spacing="10.0">
-                                             <children>
-                                                <Label text="Method" />
-                                                <ChoiceBox fx:id="method" prefWidth="149.0" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="TOP_CENTER" fillWidth="false" spacing="10.0">
-                                             <children>
-                                                <Label text="Equation" />
-                                                <ChoiceBox fx:id="equation" prefWidth="149.0" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <VBox alignment="CENTER" spacing="20.0">
-                                       <children>
-                                          <HBox alignment="TOP_CENTER" spacing="30.0">
-                                             <children>
-                                                <VBox alignment="TOP_CENTER" spacing="10.0">
-                                                   <children>
-                                                      <Label text="Left bound (x0)" />
-                                                      <TextField fx:id="x0" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox alignment="TOP_CENTER" spacing="10.0">
-                                                   <children>
-                                                      <Label text="Left bound value (y0)" />
-                                                      <TextField fx:id="y0" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="TOP_CENTER" spacing="30.0">
-                                             <children>
-                                                <VBox alignment="TOP_CENTER" spacing="10.0">
-                                                   <children>
-                                                      <Label text="Right bound (xn)" />
-                                                      <TextField fx:id="xn" />
-                                                   </children>
-                                                </VBox>
-                                                <VBox alignment="TOP_CENTER" spacing="10.0">
-                                                   <children>
-                                                      <Label text="Accuracy" />
-                                                      <TextField fx:id="accuracy" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                          <HBox alignment="TOP_CENTER" spacing="30.0">
-                                             <children>
-                                                <VBox alignment="CENTER" spacing="10.0">
-                                                   <children>
-                                                      <Button alignment="CENTER" mnemonicParsing="false" onAction="#calculate" prefWidth="149.0" text="Calculate" />
-                                                   </children>
-                                                </VBox>
-                                             </children>
-                                          </HBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane>
-                           <children>
-                              <Label fx:id="error" alignment="TOP_LEFT" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" text="Error&#10;Error&#10;Error&#10;" textFill="RED" visible="false" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <font>
-                                    <Font name="Consolas Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane fx:id="result">
-                           <children>
-                              <VBox alignment="CENTER" prefHeight="150.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <Label text="Result of the interpolation">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <HBox alignment="CENTER" spacing="30.0">
-                                       <children>
-                                          <VBox alignment="CENTER" spacing="10.0">
-                                             <children>
-                                                <Label text="Input X value" />
-                                                <TextField fx:id="xResult" />
-                                             </children>
-                                          </VBox>
-                                          <VBox alignment="CENTER" spacing="10.0">
-                                             <children>
-                                                <Label text="Y value" />
-                                                <TextField fx:id="yResult" editable="false" />
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </VBox>
-               </children>
+                  <HBox alignment="CENTER" spacing="30.0">
+                     <VBox alignment="CENTER" spacing="10.0">
+                        <Label text="Input X value"/>
+                        <TextField fx:id="xResult"/>
+                     </VBox>
+                     <VBox alignment="CENTER" spacing="10.0">
+                        <Label text="Y value"/>
+                        <TextField fx:id="yResult" editable="false"/>
+                     </VBox>
+                  </HBox>
+               </VBox>
             </AnchorPane>
-            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="775.0">
-               <children>
-                  <LineChart fx:id="chart" alternativeRowFillVisible="false" animated="false" layoutY="10.0" legendVisible="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0" prefWidth="755.0" stylesheets="@css/lineChart.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
-                     <xAxis>
-                        <NumberAxis side="BOTTOM" fx:id="xAxis" />
-                     </xAxis>
-                     <yAxis>
-                        <NumberAxis side="LEFT" fx:id="yAxis" />
-                     </yAxis>
-                  </LineChart>
-               </children>
-            </AnchorPane>
-         </children>
-      </HBox>
-   </children>
+         </VBox>
+      </AnchorPane>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="775.0" prefWidth="775.0">
+         <LineChart fx:id="chart" alternativeRowFillVisible="false" animated="false" layoutY="10.0"
+                    legendVisible="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="755.0"
+                    prefWidth="755.0" stylesheets="@css/lineChart.css" AnchorPane.bottomAnchor="10.0"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0">
+            <xAxis>
+               <NumberAxis side="BOTTOM" fx:id="xAxis"/>
+            </xAxis>
+            <yAxis>
+               <NumberAxis fx:id="yAxis" side="LEFT"/>
+            </yAxis>
+         </LineChart>
+      </AnchorPane>
+   </HBox>
 </VBox>
